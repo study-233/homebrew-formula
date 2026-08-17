@@ -1,0 +1,24 @@
+name: Formula checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ruby syntax
+        run: ruby -c Formula/zotero-pdf2zh-next.rb
+      - name: Homebrew style
+        run: brew style Formula/zotero-pdf2zh-next.rb
+      - name: Register local tap
+        run: brew tap study-233/formula "$GITHUB_WORKSPACE"
+      - name: Homebrew audit
+        run: brew audit --strict --formula study-233/formula/zotero-pdf2zh-next
