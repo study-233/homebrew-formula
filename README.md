@@ -1,10 +1,9 @@
 # study-233 Homebrew Formula
 
-Private source Formula for `zotero-pdf2zh-pro`. GitHub SSH access to both
-private repositories is required.
+Public source Formula for `zotero-pdf2zh-pro`. No GitHub SSH access is required.
 
 ```bash
-brew tap study-233/formula git@github.com:study-233/homebrew-formula.git
+brew tap study-233/formula
 brew install --build-from-source study-233/formula/zotero-pdf2zh-pro
 brew services start zotero-pdf2zh-pro
 ```
