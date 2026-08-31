@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Ruby syntax
-        run: ruby -c Formula/zotero-pdf2zh-next.rb
+        run: ruby -c Formula/zotero-pdf2zh-pro.rb
       - name: Homebrew style
-        run: brew style Formula/zotero-pdf2zh-next.rb
+        run: brew style Formula/zotero-pdf2zh-pro.rb
       - name: Register local tap
         run: brew tap study-233/formula "$GITHUB_WORKSPACE"
       - name: Homebrew audit
-        run: brew audit --strict --formula study-233/formula/zotero-pdf2zh-next
+        run: brew audit --strict --formula study-233/formula/zotero-pdf2zh-pro

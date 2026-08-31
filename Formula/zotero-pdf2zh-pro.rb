@@ -1,8 +1,8 @@
-class ZoteroPdf2zhNext < Formula
-  desc "Minimal Zotero pdf2zh_next local server"
-  homepage "https://github.com/study-233/zotero-pdf2zh-next"
-  url "git@github.com:study-233/zotero-pdf2zh-next.git", using: :git, revision: "8a71e4d91d40b4c37906f5b4932a41c058f737a3"
-  version "5.3.0"
+class ZoteroPdf2zhPro < Formula
+  desc "Local PDF translation server for Zotero PDF2ZH Pro"
+  homepage "https://github.com/study-233/zotero-pdf2zh-pro"
+  url "git@github.com:study-233/zotero-pdf2zh-pro.git", using: :git, revision: "1ab615be79ba348431416b0b30ef7188c75b055a"
+  version "1.0.0"
   license "AGPL-3.0-or-later"
 
   depends_on "uv" => :build
@@ -71,26 +71,26 @@ class ZoteroPdf2zhNext < Formula
     library_paths = [formula_opt_lib("spatialindex")]
     library_paths << formula_opt_lib("zlib-ng-compat") if OS.linux?
 
-    (bin/"zotero-pdf2zh-next").write <<~SH
+    (bin/"zotero-pdf2zh-pro").write <<~SH
       #!/usr/bin/env bash
       set -euo pipefail
 
       export LD_LIBRARY_PATH="#{library_paths.join(":")}:${LD_LIBRARY_PATH:-}"
-      exec "#{opt_libexec}/venv/bin/zotero-pdf2zh-next" "$@"
+      exec "#{opt_libexec}/venv/bin/zotero-pdf2zh-pro" "$@"
     SH
-    chmod 0755, bin/"zotero-pdf2zh-next"
+    chmod 0755, bin/"zotero-pdf2zh-pro"
   end
 
   service do
-    run [opt_bin/"zotero-pdf2zh-next", "--host", "127.0.0.1", "--port", "8890", "--log-level", "INFO"]
+    run [opt_bin/"zotero-pdf2zh-pro", "--host", "127.0.0.1", "--port", "8890", "--log-level", "INFO"]
     keep_alive true
-    log_path var/"log/zotero-pdf2zh-next.log"
-    error_log_path var/"log/zotero-pdf2zh-next.log"
+    log_path var/"log/zotero-pdf2zh-pro.log"
+    error_log_path var/"log/zotero-pdf2zh-pro.log"
   end
 
   test do
-    output = shell_output("#{bin}/zotero-pdf2zh-next --help")
-    assert_match "Run the zotero-pdf2zh-next server", output
+    output = shell_output("#{bin}/zotero-pdf2zh-pro --help")
+    assert_match "Run the zotero-pdf2zh-pro server", output
 
     system libexec/"venv/bin/python", "-c", <<~PYTHON
       from pathlib import Path
