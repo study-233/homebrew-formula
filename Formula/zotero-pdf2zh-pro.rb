@@ -4,6 +4,7 @@ class ZoteroPdf2zhPro < Formula
   url "https://github.com/study-233/zotero-pdf2zh-pro.git", using: :git, revision: "cf059e496df44a4d77dabb9f3d0b577d6b27fdc8"
   version "1.6.0"
   license "AGPL-3.0-or-later"
+  revision 1
 
   depends_on "uv" => :build
   depends_on "python@3.13"
@@ -36,6 +37,12 @@ class ZoteroPdf2zhPro < Formula
            "--no-dev",
            "--no-editable",
            "--python", formula_opt_bin("python@3.13")/"python3.13"
+
+    # Use native certificate verification before any HTTP clients are imported.
+    system "uv", "pip", "install", "--python", libexec/"venv/bin/python",
+           "--no-deps", "truststore==0.10.4"
+    inreplace libexec/"venv/bin/zotero-pdf2zh-pro", "from server import main",
+              "import truststore\ntruststore.inject_into_ssl()\nfrom server import main"
 
     site_packages = Pathname(Dir[(libexec/"venv/lib/python*/site-packages").to_s].fetch(0))
     Dir[(site_packages/"**/{test,tests}").to_s].reverse_each do |test_path|
