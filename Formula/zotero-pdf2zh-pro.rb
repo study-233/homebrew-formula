@@ -27,6 +27,7 @@ class ZoteroPdf2zhPro < Formula
     ENV.delete "PIP_INDEX_URL"
     ENV["UV_NO_CONFIG"] = "1"
     ENV["UV_DEFAULT_INDEX"] = "https://pypi.org/simple"
+    ENV["UV_SYSTEM_CERTS"] = "true"
     ENV["UV_PROJECT_ENVIRONMENT"] = libexec/"venv"
 
     system "uv", "sync",
