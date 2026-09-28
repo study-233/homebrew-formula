@@ -1,8 +1,8 @@
 class ZoteroPdf2zhPro < Formula
   desc "Local PDF translation server for Zotero PDF2ZH Pro"
   homepage "https://github.com/study-233/zotero-pdf2zh-pro"
-  url "https://github.com/study-233/zotero-pdf2zh-pro.git", using: :git, revision: "dcb688aaab4d55b5d3b57ec03f38ef7002f02a84"
-  version "1.7.3"
+  url "https://github.com/study-233/zotero-pdf2zh-pro.git", using: :git, revision: "f4eac5c98d47d113caf85036b8861a02128f51e5"
+  version "1.7.4"
   license "AGPL-3.0-or-later"
 
   depends_on "uv" => :build
@@ -40,8 +40,8 @@ class ZoteroPdf2zhPro < Formula
     # Use native certificate verification before any HTTP clients are imported.
     system "uv", "pip", "install", "--python", libexec/"venv/bin/python",
            "--no-deps", "truststore==0.10.4"
-    inreplace libexec/"venv/bin/zotero-pdf2zh-pro", "from server import main",
-              "import truststore\ntruststore.inject_into_ssl()\nfrom server import main"
+    inreplace libexec/"venv/bin/zotero-pdf2zh-pro", "from service_launcher import main",
+              "import truststore\ntruststore.inject_into_ssl()\nfrom service_launcher import main"
 
     site_packages = Pathname(Dir[(libexec/"venv/lib/python*/site-packages").to_s].fetch(0))
     Dir[(site_packages/"**/{test,tests}").to_s].reverse_each do |test_path|
