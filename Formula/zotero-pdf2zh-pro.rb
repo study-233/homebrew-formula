@@ -1,8 +1,8 @@
 class ZoteroPdf2zhPro < Formula
   desc "Local PDF translation server for Zotero PDF2ZH Pro"
   homepage "https://github.com/study-233/zotero-pdf2zh-pro"
-  url "https://github.com/study-233/zotero-pdf2zh-pro.git", using: :git, revision: "fe567a763b6cac97426d4d38a2231a59d10ff12f"
-  version "1.9.5"
+  url "https://github.com/study-233/zotero-pdf2zh-pro.git", using: :git, revision: "7395fbe79db01eb111febb8d659dbb440f77b094"
+  version "1.9.6"
   license "AGPL-3.0-or-later"
 
   depends_on "uv" => :build
