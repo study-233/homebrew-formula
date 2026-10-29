@@ -18,8 +18,7 @@ class ZoteroPdf2zhPro < Formula
 
   def install
     libexec.install Dir["server/*.py"]
-    libexec.install "server/LICENSES", "server/babeldoc", "server/pdf2zh_next",
-                    "server/rapidocr_onnxruntime"
+    libexec.install "server/LICENSES", "server/babeldoc", "server/pdf2zh_pro"
     libexec.install "server/README.md", "server/THIRD_PARTY_NOTICES.md",
                     "server/pyproject.toml", "server/uv.lock"
 
@@ -104,11 +103,11 @@ class ZoteroPdf2zhPro < Formula
 
       import babeldoc
       import cv2
-      import pdf2zh_next
-      import rapidocr_onnxruntime
+      import pdf2zh_pro
+      import pdf2zh_pro.pdf
       import skimage
 
-      site_packages = Path(pdf2zh_next.__file__).resolve().parent.parent
+      site_packages = Path(pdf2zh_pro.__file__).resolve().parent.parent
       unwanted_tests = [
           path for path in site_packages.rglob("*")
           if path.is_dir() and path.name in {"test", "tests"}
@@ -117,9 +116,8 @@ class ZoteroPdf2zhPro < Formula
       assert not (Path("#{libexec}/venv/bin/ruff")).exists()
       assert not (site_packages / "cv2/data").exists()
       assert not (site_packages / "skimage/data").exists()
-      assert pdf2zh_next.__version__ == "2.8.2"
-      assert babeldoc.__version__ == "0.5.24"
-      assert rapidocr_onnxruntime.__file__
+      assert pdf2zh_pro.__version__ == "#{version}"
+      assert babeldoc.__version__ == "0.6.4"
       assert cv2.__version__
       assert skimage.__version__
     PYTHON

@@ -22,3 +22,7 @@ jobs:
         run: brew tap study-233/formula "$GITHUB_WORKSPACE"
       - name: Homebrew audit
         run: brew audit --strict --formula study-233/formula/zotero-pdf2zh-pro
+      - name: Build and install
+        run: brew install --build-from-source study-233/formula/zotero-pdf2zh-pro
+      - name: Runtime smoke test
+        run: brew test study-233/formula/zotero-pdf2zh-pro
